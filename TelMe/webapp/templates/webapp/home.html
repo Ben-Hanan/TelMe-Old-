@@ -1,0 +1,12 @@
+{% extends "webapp/base.html" %} {% block content %} {% for plans in plans %}
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ plans.product }}</a>
+            <small class="text-muted">{{ plans.title }}</small>
+        </div>
+        <h2><a class="article-title" href="#">{{ plans.price }}</a></h2>
+        <p class="article-content">{{ plans.contract }}</p>
+    </div>
+</article>
+{% endfor %} {% endblock content %}
