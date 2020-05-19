@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.views.generic import ListView
+from .models import Product
 
 plans = [
     {
@@ -16,10 +18,9 @@ plans = [
 ]
 
 def home(request):
-    context = {
-        'plans': plans
-    }
-    return render(request, 'webapp/home.html', context)
+    template = 'webapp/home.html'
+    return render(request, template)
 
-def products(request):
-    return render(request, 'webapp/products.html')
+class Products(ListView):
+    model = Product
+    template_name = 'webapp/products.html'

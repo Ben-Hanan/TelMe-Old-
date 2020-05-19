@@ -1,3 +1,15 @@
-{% extends "webapp/base.html" %} {% block content %}
-<h1>Products Page</h1>
+{% extends "webapp/base.html" %} {% block content %} 
+<h1>All Plans</h1>
+    {% for product in object_list %}
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" href="#">{{ product.name }}</a>
+                <small class="text-muted">{{ product.telco }}</small>
+            </div>
+            <h2><a class="article-title" href="#">{{ product.contract }}</a></h2>
+            <p class="article-content">{{ product.price }}</p>
+        </div>
+    </article>
+    {% endfor %} 
 {% endblock content %}
