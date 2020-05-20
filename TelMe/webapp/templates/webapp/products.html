@@ -1,15 +1,38 @@
-{% extends "webapp/base.html" %} {% block content %} 
-<h1>All Plans</h1>
-    {% for product in object_list %}
-    <article class="media content-section">
-        <div class="media-body">
-            <div class="article-metadata">
-                <a class="mr-2" href="#">{{ product.name }}</a>
-                <small class="text-muted">{{ product.telco }}</small>
+{% extends "webapp/base.html" %} {% load static %} {% block content %} {% for product in object_list %}
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>All Plans</h1>
+            <div class="card" style="width: 18rem;">
+                <!-- we will need to handle different images depending on the telco-->
+                <img class="card-img-top" src="{% static 'img/singtel.jpg' %}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.telco }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ product.contract }}</li>
+                    <li class="list-group-item">{{ product.price }}</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
             </div>
-            <h2><a class="article-title" href="#">{{ product.contract }}</a></h2>
-            <p class="article-content">{{ product.price }}</p>
         </div>
-    </article>
-    {% endfor %} 
-{% endblock content %}
+        <div class="col-md-4">
+            <div class="content-section">
+                <h3>Filter</h3>
+                <p class='text-muted'>Filter out the plans you like.
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-light">Telco</li>
+                        <li class="list-group-item list-group-item-light">Contract Length</li>
+                        <li class="list-group-item list-group-item-light">Price</li>
+                        <li class="list-group-item list-group-item-light">Data</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+{% endfor %} {% endblock content %}

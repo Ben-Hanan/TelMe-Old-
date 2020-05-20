@@ -31,17 +31,18 @@
     <!-- Navigation -->
     <nav class="navbar navbar-light bg-light static-top">
         <div class="container">
-            <form class="form-inline">
-                <a class="navbar-brand" href="{% url 'webapp:home' %}">TelMe</a>
-                <a class="nav-item nav-link" href="{% url 'webapp:home' %}">Home</a>
-                <a class="nav-item nav-link" href="{% url 'webapp:products' %}">Products</a>
-            </form>
-            <!-- Navbar Right Side -->
-            <form class="form-inline">
-                <a class="btn btn-outline-primary" href="#">Login</a>
-                <a class="btn btn-outline-secondary" href="#">Register</a>
-            </form>
-        </div>
+            <a class="navbar-brand" href="#">TelMe</a>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" href="{% url 'webapp:home' %}">Home</a>
+                    <a class="nav-item nav-link" href="{% url 'webapp:products' %}">Products</a>
+                </div>
+                <!-- Navbar Right Side -->
+                <div class="navbar-nav">
+                    <a class="btn btn-outline-primary" href="#">Login</a>
+                    <a class="btn btn-outline-secondary" href="#">Register</a>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -69,7 +70,7 @@
                             <a href="#">Privacy Policy</a>
                         </li>
                     </ul>
-                    <p class="text-muted small mb-4 mb-lg-0">&copy; TelMe 2020. All Rights Reserved.</p>
+                    <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2019. All Rights Reserved.</p>
                 </div>
                 <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
                     <ul class="list-inline mb-0">
