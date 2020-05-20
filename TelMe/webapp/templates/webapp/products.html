@@ -1,23 +1,27 @@
-{% extends "webapp/base.html" %} {% load static %} {% block content %} {% for product in object_list %}
+{% extends "webapp/base.html" %} {% load static %} {% block content %}
 <main role="main" class="container">
     <div class="row">
         <div class="col-md-8">
             <h1>All Plans</h1>
-            <div class="card" style="width: 18rem;">
-                <!-- we will need to handle different images depending on the telco-->
-                <img class="card-img-top" src="{% static 'img/singtel.jpg' %}" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text">{{ product.telco }}</p>
+            <div class="card-columns">
+                {% for product in object_list %}
+                <div class="card" style="width: 18rem;">
+                    <!-- we will need to handle different images depending on the telco-->
+                    <img class="card-img-top" src="{% static 'img/singtel.jpg' %}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.telco }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ product.contract }}</li>
+                        <li class="list-group-item">{{ product.price }}</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{ product.contract }}</li>
-                    <li class="list-group-item">{{ product.price }}</li>
-                </ul>
-                <div class="card-body">
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
+                {% endfor %}
             </div>
         </div>
         <div class="col-md-4">
@@ -35,4 +39,4 @@
         </div>
     </div>
 </main>
-{% endfor %} {% endblock content %}
+{% endblock content %}
