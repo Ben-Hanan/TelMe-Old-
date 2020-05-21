@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-8">
             <h1>All Plans</h1>
-            <div class="card-columns">
+            <div class="card-deck">
                 {% for product in object_list %}
                 <div class="card" style="width: 18rem;">
                     <!-- we will need to handle different images depending on the telco-->
@@ -31,7 +31,12 @@
                     <ul class="list-group">
                         <li class="list-group-item list-group-item-light">Telco</li>
                         <li class="list-group-item list-group-item-light">Contract Length</li>
-                        <li class="list-group-item list-group-item-light">Price</li>
+                        <li class="list-group-item list-group-item-light">
+                            Price: <span id="demo"></span>
+                            <div class="slidecontainer">
+                                <input type="range" min="1" max="300" value="150" class="slider" id="myRange">
+                            </div>
+                        </li>
                         <li class="list-group-item list-group-item-light">Data</li>
                     </ul>
                 </p>
@@ -39,4 +44,14 @@
         </div>
     </div>
 </main>
+
+<script>
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function() {
+        output.innerHTML = this.value;
+    }
+</script>
 {% endblock content %}
