@@ -1,24 +1,26 @@
 {% extends "webapp/base.html" %} {% load static %} {% block content %}
 <main role="main" class="container">
-    <div class="row">
+    <div class="row disp">
         <div class="col-md-8">
             <h1>All Plans</h1>
             <div class="card-deck">
                 {% for product in object_list %}
-                <div class="card" style="width: 18rem;">
-                    <!-- we will need to handle different images depending on the telco-->
-                    <img class="card-img-top" src="{% static 'img/singtel.jpg' %}" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        <p class="card-text">{{ product.telco }}</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">{{ product.contract }}</li>
-                        <li class="list-group-item">{{ product.price }}</li>
-                    </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
+                <div class="col-md-6" style="padding-bottom: 10px;padding-top: 10px;">
+                    <div class="card" style="width: 18rem;">
+                        <!-- we will need to handle different images depending on the telco-->
+                        <img class="card-img-top" src="{% static 'img/singtel.jpg' %}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.telco }}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{ product.contract }}</li>
+                            <li class="list-group-item">{{ product.price }}</li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="#" class="card-link">More Details</a>
+                            <a href="#" class="card-link">Visit Site</a>
+                        </div>
                     </div>
                 </div>
                 {% endfor %}
