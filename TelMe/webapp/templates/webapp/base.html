@@ -24,6 +24,13 @@
     <!-- Custom styles for this template -->
     <link href="{% static 'css/landing-page.min.css' %}" rel="stylesheet">
 
+    <!-- Bootstrap for pagination, idk i just copy and pasted this in -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+      href="{% static 'css/pagination.css' %}">
+
 </head>
 
 <body>
@@ -32,9 +39,9 @@
     <nav class="navbar navbar-light bg-light static-top">
         <div class="container">
             <form class="form-inline">
-                <a class="navbar-brand" href="{% url 'webapp:home' %}">TelMe</a>
-                <a class="nav-item nav-link" href="{% url 'webapp:home' %}">Home</a>
-                <a class="nav-item nav-link" href="{% url 'webapp:products' %}">Products</a>
+                <a class="navbar-brand" href="{% url 'home' %}">TelMe</a>
+                <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
+                <a class="nav-item nav-link" href="{% url 'products' %}">Products</a>
             </form>
             <!-- Navbar Right Side -->
             <form class="form-inline">
