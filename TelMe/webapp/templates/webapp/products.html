@@ -1,70 +1,75 @@
-{% extends "webapp/base.html" %} {% load static %} {% block content %}
+{% extends "webapp/base.html" %} {% load static %} {% load crispy_forms_tags %}{% block content %}
 <main role="main" class="container">
-    <div class="row disp">
-        <div class="col-md-8">
-            <h1>All Plans</h1>
-            <div class="card-deck">
-                {% for product in products %}
-                <div class="col-md-6" style="padding-bottom: 10px;padding-top: 10px;">
-                    <div class="card" style="width: 18rem;">
-                        <!-- we will need to handle different images depending on the telco-->
-                        <img class="card-img-top" src="{% static 'img/singtel.jpg' %}" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ product.name }}</h5>
-                            <p class="card-text">{{ product.telco }}</p>
+    <h1>All Plans</h1>
+
+    <div class="container d-flex justify-content" id="overall">
+        <div class="border container h-100" style="max-width: 300px">
+            <h3>Filter</h3>
+            <p class='text-muted'>Filter out the plans you like.
+                <ul class="list-group">
+                    <form method="get">
+                        {{ myFilter.form | crispy}}
+                        <button class="btn btn-primary" type="submit">Go!</button>
+                    </form>
+                </ul>
+            </p>
+        </div>
+        <div class="container">
+            {% for product in products %}
+            <div style="padding-bottom: 10px;padding-top: 10px;">
+                <div class="card mb-3" style="max-width: 600px;">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img class="card-img" src="{% static 'img/singtel.jpg' %}" alt="Telco">
                         </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">{{ product.contract }}</li>
-                            <li class="list-group-item">{{ product.price }}</li>
-                        </ul>
-                        <div class="card-body">
-                            <a href="#" class="card-link">More Details</a>
-                            <a href="#" class="card-link">Visit Site</a>
+                        <div class="col-md-8 d-flex">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                <p class="card-text">{{ product.telco }}</p>
+                                <p class="card-text">${{ product.price }} </p>
+                                <p class="card-text">{{ product.contract }}</p>
+                            </div>
+                            <div class="border" style="height: 120px; width: 1px; border: 1px solid rgb(244, 245, 246); margin-top: 30px;"></div>
+                            <div class="card-body">
+                                <div class="h-25"></div>
+                                <div class="h-25">
+                                    <a href="#" class="card-link">More Details</a>
+                                </div>
+                                <div class="h-25">
+                                    <a href="#" class="card-link">Visit Site</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
             </div>
+            {% endfor %}
         </div>
-        <div class="col-md-4">
-            <div class="content-section">
-                <h3>Filter</h3>
-                <p class='text-muted'>Filter out the plans you like.
-                    <ul class="list-group">
-                        <form method="get">
-                            {{ myFilter.form }}
-                            <button class="btn btn-primary" type="submit">Go!</button>
-                        </form>
-                    </ul>
-                </p>
-            </div>
-        </div>
+
+    </div>
+    </div>
+
     </div>
     <div class="pagination">
         {% if products.has_previous %}
-            <a class="pagination-action" href="?page=1">
-                <i class="fa fa-angle-double-left" aria-hidden="true"></i> </a>
-            <a class="pagination-action" href="?page={{ products.previous_page_number }}">
-                <i class="fa fa-angle-left" aria-hidden="true"></i>
-            </a>
-        {% endif %}
-        {% for num in products.paginator.page_range %}
-            {% if products.number == num %}
-                <span class="pagination-number pagination-current">{{ num }}</span>
-            {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
-                <a class="pagination-number" href="?page={{ num }}">{{ num }}</a>
-            {% endif %}
-        {% endfor %}
-        {% if products.has_next %}
+        <a class="pagination-action" href="?page=1">
+            <i class="fa fa-angle-double-left" aria-hidden="true"></i> </a>
+        <a class="pagination-action" href="?page={{ products.previous_page_number }}">
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+        </a>
+        {% endif %} {% for num in products.paginator.page_range %} {% if products.number == num %}
+        <span class="pagination-number pagination-current">{{ num }}</span> {% elif num > products.number|add:'-3' and num
+        < products.number|add: '3' %} <a class="pagination-number" href="?page={{ num }}">{{ num }}</a>
+            {% endif %} {% endfor %} {% if products.has_next %}
             <a class="pagination-action" href="?page={{ products.next_page_number }}">
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
             </a>
             <a class="pagination-action" href="?page={{ products.paginator.num_pages }}">
                 <i class="fa fa-angle-double-right" aria-hidden="true"></i>
             </a>
-        {% endif %}
+            {% endif %}
     </div>
-    
+
 </main>
 
 <script>
@@ -77,5 +82,3 @@
     }
 </script>
 {% endblock content %}
-
-
