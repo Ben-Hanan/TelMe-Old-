@@ -132,3 +132,8 @@ footer.footer {
     margin-right: auto;
     margin-left: auto;
 }
+
+.img-max {
+    max-width: 140px;
+    width: 100%;
+}

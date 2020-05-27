@@ -2,6 +2,14 @@ from django.shortcuts import render, redirect
 from .models import *
 from .filters import ProductFilter
 from django.core.paginator import Paginator
+from django.views.generic import ListView
+
+class ProductList(ListView):
+    model = Product
+
+def productdetail(request,id):
+    product = Product.objects.get(id = id)
+    return render(request, 'webapp/product_details.html', {'product': product})
 
 def home(request):
     template = 'webapp/home.html'
