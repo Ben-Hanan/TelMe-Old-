@@ -1,0 +1,6 @@
+<div class="pagination">
+    {% for num in items.paginator.page_range %}
+        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li> 
+    {% endfor %}
+</div>
+
