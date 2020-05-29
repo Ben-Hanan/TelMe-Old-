@@ -1,15 +1,16 @@
 {% extends "webapp/base.html" %} {% load static %} {% load crispy_forms_tags %} {% block content %}
 <div class="container">
     <h1>{{ product.name }}</h1>
-    <section class="showcase">
-        <div class="container-fluid p-0">
-            <div class="row no-gutters">
-                <div class="col-md-6 d-flex flex-column">
-                    {% if product.telco == 'Singtel' %}
-                    <img class="card-img img-max" src="{% static 'img/singtel.jpg' %}" alt="Telco"> {% elif product.telco == 'Starhub' %}
-                    <img class="card-img img-max" src="{% static 'img/starhub.jpg' %}" alt="Telco"> {% elif product.telco == 'M1' %}
-                    <img class="card-img img-max" src="{% static 'img/M1.jpg' %}" alt="Telco"> {% endif %}
-                    <span class="container align-self-center d-flex flex-row">
+    <div class="container d-flex justify-content" id="overall">
+        <div class="border container h-100 rounded" style="max-width: 300px; padding-bottom: 15px;">
+            <div class="d-flex flex-column align-self-center">
+                {% if product.telco == 'Singtel' %}
+                <img class="card-img img-max align-self-center" src="{% static 'img/singtel.jpg' %}" alt="Telco"> {% elif product.telco == 'Starhub' %}
+                <img class="card-img img-max align-self-center" src="{% static 'img/starhub.jpg' %}" alt="Telco"> {% elif product.telco == 'M1' %}
+                <img class="card-img img-max align-self-center" src="{% static 'img/M1.jpg' %}" alt="Telco"> {% endif %}
+                <h3 class="align-self-center">{{ product.telco }}</h3>
+                <span class="container align-self-center d-flex flex-row" style="padding-bottom:15px;">
+                    <div class="container d-flex align-self-center" style="max-width: 140px">
                         <form action="{% url 'like-product' %}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="product_id" value="{{ product.id }}"> {% if user not in product.liked.all %}
@@ -17,15 +18,49 @@
                             <button class="ui button negative" type="submit">Unlike</button> {% endif %}
                         </form>
                         <strong style="margin-left: 10px">{{ product.liked.all.count }} likes</strong>
-                    </span>
-                </div>
-                <div class="col-lg-6 my-auto showcase-text">
-                    <h2>Updated For Bootstrap 4</h2>
-                    <p class="lead mb-0">Newly improved, and full of great utility classes, Bootstrap 4 is leading the way in mobile responsive web development! All of the themes on Start Bootstrap are now using Bootstrap 4!</p>
-                </div>
+                    </div>
+                </span>
+                    <a class="btn btn-primary align-self-center" href="#">Compare other plans!</a>
             </div>
         </div>
-    </section>
+        <div class="container">
+            <div class="container" style="padding-bottom: 15px;">
+                <div class="border container rounded">
+                    <div style="padding-top: 10px; padding-bottom:10px">
+                        <h3>Plan Information</h3>
+                        <div class="container" style="padding-bottom: 10px; padding-left: 0px">
+                            <small class="text-muted">{{ product.category }}</small>
+                            <h4>{{ product.name }}</h4>
+                        </div>
+                        <div class="container d-flex justify-content-between" style="padding-bottom: 10px; padding-left: 0px; padding-right: 0px">
+                            <h4>${{ product.price }} <small class="text-muted">per month</small></h4>
+                            <button class="btn btn-light"><h5>{{ product.contract }}</h4></button>
+                        </div>
+                        <p>
+                            {{ product.description }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="container" style="padding-bottom: 15px;">
+                <div class="border container rounded">
+                    <div style="padding-top: 10px; padding-bottom:10px">
+                        <h3>Other Information</h3>
+                        <div class="container">
+                            
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">{{ product.category }}</li>
+                            <li class="list-group-item">{{ product.name }}</li>
+                            <li class="list-group-item">{{ product.contract }}</li>
+                            <li class="list-group-item">{{ product.price }}</li>
+                            <li class="list-group-item">{{ product.description }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>           
+        </div>
+    </div>
 </div>
 
 {% endblock content %}
