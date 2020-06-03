@@ -2,12 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
-class Tag(models.Model):
-    name = models.CharField(max_length = 200)
-
-    def __str__(self):
-        return self.name
-
 class Product(models.Model):
     CATEGORY = (
         ('Postpaid', 'Postpaid'),
@@ -34,7 +28,6 @@ class Product(models.Model):
     price = models.FloatField(null=True)
     description = models.CharField(max_length=200, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    tags = models.ManyToManyField(Tag, blank=True)
     liked = models.ManyToManyField(User, default=None, blank=True, related_name='liked')
 
     def __str__(self):
@@ -43,15 +36,6 @@ class Product(models.Model):
     @property
     def num_likes(self):
         return self.liked.all.count() 
-
-class Review(models.Model):
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author')
-    review = models.CharField(max_length=200, null=True)
-    date_created = models.DateTimeField(auto_now_add=True, null=True)
-
-    def __str__(self):
-        return self.name
 
 class Like(models.Model):
     LIKE_CHOICES = (
