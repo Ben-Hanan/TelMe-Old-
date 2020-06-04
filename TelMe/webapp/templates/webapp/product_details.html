@@ -10,7 +10,7 @@
                 <img class="card-img img-max align-self-center" src="{% static 'img/M1.jpg' %}" alt="Telco"> {% endif %}
                 <h3 class="align-self-center">{{ product.telco }}</h3>
                 <span class="container align-self-center d-flex flex-row" style="padding-bottom:15px;">
-                    <div class="container d-flex align-self-center" style="max-width: 140px">
+                    <div class="container d-flex align-self-center" style="max-width: 150px">
                         <form action="{% url 'like-product' %}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="product_id" value="{{ product.id }}"> {% if user not in product.liked.all %}
