@@ -4,18 +4,22 @@ from .filters import ProductFilter
 from django.core.paginator import Paginator
 from django.views.generic import ListView
 
+
 class ProductList(ListView):
     model = Product
 
-def productdetail(request,id):
-    product = Product.objects.get(id = id)
+
+def productdetail(request, id):
+    product = Product.objects.get(id=id)
     return render(request, 'webapp/product_details.html', {'product': product})
+
 
 def home(request):
     template = 'webapp/home.html'
     context = {
     }
     return render(request, template, context)
+
 
 def products(request):
     template = 'webapp/products.html'
@@ -27,11 +31,12 @@ def products(request):
     products = paginator.get_page(page)
 
     context = {
-        'products' : products,
-        'myFilter' : myFilter
+        'products': products,
+        'myFilter': myFilter
     }
-    
+
     return render(request, template, context)
+
 
 def like_product(request):
     user = request.user
@@ -43,14 +48,15 @@ def like_product(request):
             product_obj.liked.remove(user)
         else:
             product_obj.liked.add(user)
-        
-        like, created = Like.objects.get_or_create(user=user, product_id=product_id)
+
+        like, created = Like.objects.get_or_create(
+            user=user, product_id=product_id)
 
         if not created:
             if like.value == 'Like':
                 like.value = 'Unlike'
             else:
                 like.value = 'Like'
-        
+
         like.save()
     return redirect('products')
