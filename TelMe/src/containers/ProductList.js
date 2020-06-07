@@ -14,8 +14,6 @@ import {
 } from "semantic-ui-react";
 import { productListURL } from "../constants";
 
-const paragraph = <Image src="/images/wireframe/short-paragraph.png" />;
-
 class ProductList extends React.Component {
   state = {
     loading: false,
@@ -28,6 +26,7 @@ class ProductList extends React.Component {
     axios
       .get(productListURL)
       .then((res) => {
+        console.log(res.data);
         this.setState({ data: res.data, loading: false });
       })
       .catch((err) => {
@@ -55,28 +54,28 @@ class ProductList extends React.Component {
               <Loader inverted>Loading</Loader>
             </Dimmer>
 
-            <Image src="/images/wireframe/short-paragraph.png" />
           </Segment>
         )}
         <Item.Group divided>
-          <Item>
-            <Item.Image src="/images/wireframe/image.png" />
+          {data.map(product => {
+            return <Item key={product.id}>
+              <Item.Content>
+                <Item.Header as="a">{product.name}</Item.Header>
+                <Item.Meta>
+                  <span className="cinema">{product.telco}</span>
+                </Item.Meta>
+                <Item.Description>{product.description}</Item.Description>
+                <Item.Extra>
+                  <Button primary floated="right" icon labelPosition="right">
+                    Like
+                    <Icon name="right arrow" />
+                  </Button>
+                  <Label>{product.category}</Label>
+                </Item.Extra>
+              </Item.Content>
+            </Item>
+          })}
 
-            <Item.Content>
-              <Item.Header as="a">My Neighbor Totoro</Item.Header>
-              <Item.Meta>
-                <span className="cinema">IFC Cinema</span>
-              </Item.Meta>
-              <Item.Description>{paragraph}</Item.Description>
-              <Item.Extra>
-                <Button primary floated="right" icon labelPosition="right">
-                  Buy tickets
-                  <Icon name="right arrow" />
-                </Button>
-                <Label>Limited</Label>
-              </Item.Extra>
-            </Item.Content>
-          </Item>
         </Item.Group>
       </Container>
     );

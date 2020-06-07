@@ -4,4 +4,4 @@ const apiURL = "/api";
 
 const endpoint = `${localhost}${apiURL}`;
 
-export const productListURL = `${endpoint}/product-list`;
+export const productListURL = `${endpoint}/products/`;
