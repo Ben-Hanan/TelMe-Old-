@@ -1,7 +1,9 @@
-const localhost = "http://127.0.0.1:8000/";
+const localhost = "http://127.0.0.1:8000";
 
 const apiURL = "/api";
 
 const endpoint = `${localhost}${apiURL}`;
 
 export const productListURL = `${endpoint}/products/`;
+export const productDetailURL = id => `${endpoint}/products/${id}/`;
+

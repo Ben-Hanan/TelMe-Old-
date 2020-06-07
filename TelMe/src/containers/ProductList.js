@@ -60,7 +60,14 @@ class ProductList extends React.Component {
           {data.map(product => {
             return <Item key={product.id}>
               <Item.Content>
-                <Item.Header as="a">{product.name}</Item.Header>
+                <Item.Header as="a"
+                as="a"
+                onClick={() =>
+                  this.props.history.push(`/products/${product.id}`)
+                }
+                >
+                  {product.name}
+                </Item.Header>
                 <Item.Meta>
                   <span className="cinema">{product.telco}</span>
                 </Item.Meta>

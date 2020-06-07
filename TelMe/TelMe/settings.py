@@ -25,8 +25,7 @@ SECRET_KEY = '83v9(g=k)nj*&p2wxu$xo&#r$p-ru3a6jk8x5t(7^jxb8m99f0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
-
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -139,10 +138,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SITE_ID = 1
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000',
-)
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
