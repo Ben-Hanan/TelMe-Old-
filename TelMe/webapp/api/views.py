@@ -7,10 +7,12 @@ from .serializers import (
     ProductDetailSerializer,
 )
 
+
 class ProductFilter(filters.FilterSet):
     class Meta:
         model = Product
         fields = ('telco', 'category', 'contract')
+
 
 class ProductListView(ListAPIView):
     permission_classes = (AllowAny, )
@@ -18,6 +20,7 @@ class ProductListView(ListAPIView):
     queryset = Product.objects.all()
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = ProductFilter
+
 
 class ProductDetailView(RetrieveAPIView):
     permission_classes = (AllowAny,)

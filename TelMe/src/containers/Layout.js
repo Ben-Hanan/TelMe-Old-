@@ -2,47 +2,94 @@ import React from "react";
 import {
   Container,
   Divider,
-  Dropdown,
   Grid,
   Header,
   Image,
   List,
   Menu,
-  Segment
+  Segment,
+  Button,
 } from "semantic-ui-react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../store/actions/auth";
 
 class CustomLayout extends React.Component {
+  state = { activeItem: window.location.pathname };
+
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
   render() {
     const { authenticated } = this.props;
+    const { activeItem } = this.state;
+
     return (
       <div>
-        <Menu inverted>
-          <Container>
-            <Link to="/">
-              <Menu.Item header>Home</Menu.Item>
-            </Link>
-            {authenticated ? (
-              <Menu.Item header onClick={() => this.props.logout()}>
-                Logout
+        <Segment inverted vertical>
+          <Menu inverted secondary pointing>
+            <Container>
+              <Menu.Item
+                header
+                href="/"
+                active={activeItem === "/"}
+                onClick={this.handleItemClick}
+                name="/"
+              >
+                TelMe
               </Menu.Item>
-            ) : (
-              <React.Fragment>
-                <Link to="/login">
-                  <Menu.Item header>Login</Menu.Item>
-                </Link>
-                <Link to="/signup">
-                  <Menu.Item header>Signup</Menu.Item>
-                </Link>
-              </React.Fragment>
-            )}
-            <Link to="/products">
-                  <Menu.Item header>Products</Menu.Item>
-                </Link>
-          </Container>
-        </Menu>
+              <Menu.Item
+                as="a"
+                href="#"
+                active={activeItem === "new"}
+                onClick={this.handleItemClick}
+                name="new"
+              >
+                What's New
+              </Menu.Item>
+              <Menu.Item
+                as="a"
+                href="/products"
+                active={activeItem === "/products"}
+                onClick={this.handleItemClick}
+                name="/products"
+              >
+                Products
+              </Menu.Item>
+              <Menu.Item
+                as="a"
+                href="#"
+                active={activeItem === "/compare"}
+                onClick={this.handleItemClick}
+                name="/compare"
+              >
+                Compare
+              </Menu.Item>
+              {authenticated ? (
+                <React.Fragment>
+                  <Menu.Menu position="right">
+                    <Menu.Item header onClick={() => this.props.logout()}>
+                      Logout
+                    </Menu.Item>
+                  </Menu.Menu>
+                </React.Fragment>
+              ) : (
+                <Menu.Menu position="right">
+                  <Button as="a" inverted href="/login">
+                    Login
+                  </Button>
+                  <Button
+                    href="/signup"
+                    as="a"
+                    inverted
+                    style={{ marginLeft: "0.5em" }}
+                  >
+                    Sign Up
+                  </Button>
+                </Menu.Menu>
+              )}
+            </Container>
+          </Menu>
+        </Segment>
 
         {this.props.children}
 
@@ -112,21 +159,18 @@ class CustomLayout extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    authenticated: state.auth.token !== null
+    authenticated: state.auth.token !== null,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    logout: () => dispatch(logout())
+    logout: () => dispatch(logout()),
   };
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(CustomLayout)
+  connect(mapStateToProps, mapDispatchToProps)(CustomLayout)
 );

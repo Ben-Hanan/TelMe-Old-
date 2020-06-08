@@ -8,17 +8,50 @@ import {
   Header,
   Icon,
   Image,
-  List,
-  Menu,
   Responsive,
   Segment,
   Sidebar,
-  Visibility
+  Visibility,
 } from "semantic-ui-react";
 
 const getWidth = () => {
   const isSSR = typeof window === "undefined";
   return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth;
+};
+
+const HomepageHeading = ({ mobile }) => (
+  <Container text>
+    <Header
+      inverted
+      as="h1"
+      content="Enter the plan you're looking for!"
+      style={{
+        fontSize: mobile ? "2em" : "3em",
+        fontWeight: "normal",
+        marginBottom: 0,
+        marginTop: mobile ? "1.5em" : "3em",
+      }}
+    />
+    <Header
+      inverted
+      as="h2"
+      content="Getting your next plan is just a click away."
+      style={{
+        fontSize: mobile ? "1.5em" : "1.7em",
+        fontWeight: "normal",
+        marginTop: mobile ? "0.5em" : "1.5em",
+        marginBottom: mobile ? "0.5em" : "1.5em",
+      }}
+    />
+    <Button primary size="huge" href="/products">
+      Get Started
+      <Icon name="right arrow" />
+    </Button>
+  </Container>
+);
+
+HomepageHeading.propTypes = {
+  mobile: PropTypes.bool,
 };
 
 class DesktopContainer extends Component {
@@ -29,7 +62,7 @@ class DesktopContainer extends Component {
 
   render() {
     const { children } = this.props;
-    const { fixed } = this.state;
+    //const { fixed } = this.state;
 
     return (
       <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
@@ -37,7 +70,16 @@ class DesktopContainer extends Component {
           once={false}
           onBottomPassed={this.showFixedMenu}
           onBottomPassedReverse={this.hideFixedMenu}
-        />
+        >
+          <Segment
+            inverted
+            textAlign="center"
+            style={{ minHeight: 700, padding: "1em 0em" }}
+            vertical
+          >
+            <HomepageHeading />
+          </Segment>
+        </Visibility>
         {children}
       </Responsive>
     );
@@ -45,7 +87,7 @@ class DesktopContainer extends Component {
 }
 
 DesktopContainer.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 class MobileContainer extends Component {
@@ -57,7 +99,7 @@ class MobileContainer extends Component {
 
   render() {
     const { children } = this.props;
-    const { sidebarOpened } = this.state;
+    //const { sidebarOpened } = this.state;
 
     return (
       <Responsive
@@ -72,7 +114,7 @@ class MobileContainer extends Component {
 }
 
 MobileContainer.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 const ResponsiveContainer = ({ children }) => (
@@ -83,7 +125,7 @@ const ResponsiveContainer = ({ children }) => (
 );
 
 ResponsiveContainer.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 const HomepageLayout = () => (

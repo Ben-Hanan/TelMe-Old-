@@ -8,7 +8,6 @@ import HomepageLayout from "./containers/Home";
 import ProductList from "./containers/ProductList";
 import ProductDetail from "./containers/ProductDetail";
 
-
 const BaseRouter = () => (
   <Hoc>
     <Route exact path="/products" component={ProductList} />
@@ -18,5 +17,15 @@ const BaseRouter = () => (
     <Route exact path="/" component={HomepageLayout} />
   </Hoc>
 );
+
+// function requireAuth(nextState, replace, next) {
+//   if (!authenticated) {
+//     replace({
+//       pathname: "/login",
+//       state: {nextPathname: nextState.location.pathname}
+//     });
+//   }
+//   next();
+// }
 
 export default BaseRouter;
