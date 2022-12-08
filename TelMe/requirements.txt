@@ -6,7 +6,7 @@ pytz==2020.1
 sqlparse==0.3.1
 astroid==2.2.5
 autopep8==1.4.4
-certifi==2019.6.16
+certifi==2022.12.7
 chardet==3.0.4
 defusedxml==0.6.0
 Django==2.2.13
